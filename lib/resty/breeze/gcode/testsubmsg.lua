@@ -74,7 +74,10 @@ function _M.write_to(self, buf)
                 for k,v in pairs(self.myMap2) do
                     brz_w.write_int32(fbuf, k, false)
                     brz_w.write_packed_array(fbuf, false, #v, function(fbuf)
-                        brz_w.write_int32_array_elems(fbuf, v)
+                        brz_w.write_int32_type(fbuf)
+                        for _,in_v in ipairs(v) do
+                            brz_w.write_int32(fbuf, in_v, false)
+                        end
                     end)
                 end
             end)
@@ -83,7 +86,10 @@ function _M.write_to(self, buf)
         local myArray_size = #self.myArray
         if myArray_size > 0 then
             brz_w.write_array_field(fbuf, 10, myArray_size, function(fbuf)
-                brz_w.write_int32_array_elems(fbuf, self.myArray)
+                brz_w.write_int32_type(fbuf)
+                for _,in_v in ipairs(self.myArray) do
+                    brz_w.write_int32(fbuf, in_v, false)
+                end
             end)
         end
         brz_w.write_bool_field(fbuf, 11, self.myBool)

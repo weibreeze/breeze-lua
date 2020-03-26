@@ -47,13 +47,10 @@ function _M.write_to(self, buf)
         
         if myMap_size > 0 then
             brz_w.write_map_field(fbuf, 3, myMap_size, function(fbuf)
-                local first = true
+                local _, mt_v = next(self.myMap)
+                brz_w.write_string_type(fbuf)
+                brz_w.write_message_type(fbuf, mt_v:get_name())
                 for k,v in pairs(self.myMap) do
-                    if first then
-                        brz_w.write_string_type(fbuf)
-                        brz_w.write_message_type(fbuf, v:get_name())
-                        first = false
-                    end
                     brz_w.write_string(fbuf, k, false)
                     v:write_to(fbuf)
                 end
@@ -64,13 +61,9 @@ function _M.write_to(self, buf)
         local myArray_size = #self.myArray
         if myArray_size > 0 then
             brz_w.write_array_field(fbuf, 4, myArray_size, function(fbuf)
-                local first = true
+                local mt_v = self.myArray[1]
+                brz_w.write_message_type(fbuf, mt_v:get_name())
                 for _,v in ipairs(self.myArray) do
-                    if first then
-                        brz_w.write_message_type(fbuf, v:get_name())
-                        first = false
-                    end
-                    
                     v:write_to(fbuf)
                 end
             end)

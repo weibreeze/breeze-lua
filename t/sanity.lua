@@ -198,12 +198,13 @@ local msg = message_t:new({
     enumArray = {my_enum1, my_enum2, my_enum3}
 })
 
-local t = {a=sub_msg1, b=sub_msg2}
+-- local t = {a=sub_msg1, b=sub_msg2}
 -- local t = {sub_msg2}
+local t = msg
 local res = _M.serialize(t)
 -- print_b(res, 1)
 local lres = _M.deserialize(res)
-print_r(lres.b.myString)
+print_r(lres.subMsg.myArray)
 
 
 -- local t = {{'a', 'b'}, 'c', sub_msg1}
