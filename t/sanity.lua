@@ -204,7 +204,8 @@ local t = msg
 local res = _M.serialize(t)
 -- print_b(res, 1)
 local lres = _M.deserialize(res)
-print_r(lres.subMsg.myArray)
+print_r(lres.myMap.sub_msg1.myMap2[1])
+print_r(lres.enumArray[1].enumNumber)
 
 
 -- local t = {{'a', 'b'}, 'c', sub_msg1}

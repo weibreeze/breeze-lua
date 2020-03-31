@@ -627,7 +627,8 @@ local _M = {
     write_float64_field = write_float64_field,
     write_map_field = write_map_field,
     write_array_field = write_array_field,
-    write_packed_map_field = write_packed_map_field,
+    write_packed_map_field = write_map_field,
+    write_packed_array_field = write_array_field,
     write_message_field = write_message_field,
     write_value = write_value,
 }
